@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/server_chess.dir/sources/online/ServerGame.cpp.o CMakeFiles/server_chess.dir/sources/online/AbstractOnlinePlayer.cpp.o CMakeFiles/server_chess.dir/sources/online/RemotePlayer.cpp.o CMakeFiles/server_chess.dir/sources/online/LocalPlayer.cpp.o "CMakeFiles/server_chess.dir/sources/online/main-server.cpp.o" -o server_chess  sources/libCommonFiles.a

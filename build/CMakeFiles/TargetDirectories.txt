@@ -1,0 +1,8 @@
+/home/arch/Desktop/Codes/C++/Rasta/final/build/CMakeFiles/offline_chess.dir
+/home/arch/Desktop/Codes/C++/Rasta/final/build/CMakeFiles/client_chess.dir
+/home/arch/Desktop/Codes/C++/Rasta/final/build/CMakeFiles/server_chess.dir
+/home/arch/Desktop/Codes/C++/Rasta/final/build/CMakeFiles/edit_cache.dir
+/home/arch/Desktop/Codes/C++/Rasta/final/build/CMakeFiles/rebuild_cache.dir
+/home/arch/Desktop/Codes/C++/Rasta/final/build/sources/CMakeFiles/CommonFiles.dir
+/home/arch/Desktop/Codes/C++/Rasta/final/build/sources/CMakeFiles/edit_cache.dir
+/home/arch/Desktop/Codes/C++/Rasta/final/build/sources/CMakeFiles/rebuild_cache.dir

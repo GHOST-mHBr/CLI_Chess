@@ -1,0 +1,1 @@
+/usr/bin/c++ "CMakeFiles/offline_chess.dir/sources/offline/main-offline.cpp.o" -o offline_chess  sources/libCommonFiles.a
