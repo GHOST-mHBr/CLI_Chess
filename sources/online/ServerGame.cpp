@@ -10,7 +10,7 @@ ServerGame::ServerGame() : Game(nullptr, nullptr) {}
 
 void ServerGame::initializeSocket() {
     uint16_t portNumber = TerminalStuffs::readFromInput<uint16_t>(
-        "Select the port to start server on: ");
+        "Select the port to start server on: ", TCPSocket::port_regex);
     serverSocket = TCPServer{portNumber};
 }
 
@@ -19,7 +19,7 @@ void ServerGame::startServer() { serverSocket.start(); }
 void ServerGame::initializeLocalPlayer() {
     PrettyPrint::simplePrint("");
     string name =
-        TerminalStuffs::readFromInput<string>("Enter a name for your player: ");
+        TerminalStuffs::readFromInput<string>("Enter a name for your player: ", std::regex(R"(\b.*\b)"));
 
     whitePlayer = std::make_unique<LocalPlayer>(name, PlayerColor::WHITE, *this, serverSocket);
     serverSocket.sendData(name);

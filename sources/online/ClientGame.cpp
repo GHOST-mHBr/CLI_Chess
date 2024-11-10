@@ -10,10 +10,10 @@ ClientGame::ClientGame():Game(nullptr , nullptr) {}
 
 void ClientGame::initializeSocket() {
     std::string ip = TerminalStuffs::readFromInput<std::string>(
-        std::move(string("Enter the ip you want to connect to: ")));
+        std::string("Enter the ip you want to connect to: ") , TCPSocket::ipv4_regex);
 
     uint16_t port = TerminalStuffs::readFromInput<uint16_t>(
-        "Enter the port you want to connect to: ");
+        "Enter the port you want to connect to: ", TCPSocket::port_regex);
 
     clientSocket = TCPClient(ip, port);
     clientSocket.start();
@@ -21,7 +21,7 @@ void ClientGame::initializeSocket() {
 
 void ClientGame::initLocalPlayer() {
     std::string name =
-        TerminalStuffs::readFromInput<std::string>("Enter a name for the player: ");
+        TerminalStuffs::readFromInput<std::string>("Enter a name for the player: ", std::regex(R"(^\b.*\b$)"));
 
     blackPlayer = std::make_unique<LocalPlayer>(name, PlayerColor::BLACK, *this, clientSocket);
 }

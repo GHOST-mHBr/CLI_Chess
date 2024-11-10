@@ -56,7 +56,7 @@ bool TCPServer::startServer() {
     } else {
         cout << "Got a connection with ip: "
              << inet_ntoa(clientAddress.sin_addr)
-             << "and port: " << ntohs(clientAddress.sin_port) << endl;
+             << " and port: " << ntohs(clientAddress.sin_port) << endl;
     }
 
     return true;
@@ -72,8 +72,8 @@ ssize_t TCPServer::sendData(const uint8_t* buffer, size_t len) const {
             len = c-clean_buffer+1;
             break;
         }
-    }    
-    
+    }
+
     return send(clientFd, clean_buffer, len, 0);
 }
 

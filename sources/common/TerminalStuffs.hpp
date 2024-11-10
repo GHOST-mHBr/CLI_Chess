@@ -1,40 +1,37 @@
 #pragma once
+#include "PrettyPrint.hpp"
 #include <cstdlib>
-#include <string>
 #include <iostream>
+#include <regex>
 #include <sstream>
 #include <string>
-#include "PrettyPrint.hpp"
 
 using std::cin;
+using std::regex;
+using std::regex_match;
 using std::string;
 
 class TerminalStuffs {
 public:
-    static void clearTerminal() noexcept{system("clear");};
+    static void clearTerminal() noexcept { system("clear"); };
 
     template <typename T>
-    [[nodiscard]] static T readFromInput() noexcept{
+    [[nodiscard]] static T readFromInput(const std::string&& prompt,
+                                         const std::regex& regex) {
         string str;
-        getline(cin, str);
-        std::istringstream iss(str);
         T result;
-
         bool done = false;
+
         do {
+            PrettyPrint::simplePrint(prompt);
+            getline(cin, str);
+            std::istringstream iss{str};
             iss >> result;
-            done = !(iss.fail() || !iss.eof());
-            if (!done) {
+            done = !(iss.fail() || !iss.eof()) && regex_match(str, regex);
+            if (!done)
                 PrettyPrint::simplePrintln("Error, try again");
-            }
+
         } while (!done);
-
         return result;
-    }
-
-    template <typename T>
-    [[nodiscard]] static T readFromInput(std::string&& prompt) noexcept{
-        PrettyPrint::simplePrint(prompt);
-        return readFromInput<T>();
     }
 };
