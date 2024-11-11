@@ -16,7 +16,7 @@ public:
     static void clearTerminal() noexcept { system("clear"); };
 
     template <typename T>
-    [[nodiscard]] static T readFromInput(const std::string&& prompt,
+    [[nodiscard]] static T readFromInput(const std::string& prompt,
                                          const std::regex& regex) {
         string str;
         T result;

@@ -18,6 +18,7 @@ class Coordinates{
         Coordinates(){value={0,0};};
         Coordinates(uint8_t, uint8_t);
         Coordinates(pair<uint8_t,uint8_t>);
+        Coordinates(const string& str);
 
 
         [[nodiscard]] bool operator==(const Coordinates &other) const{

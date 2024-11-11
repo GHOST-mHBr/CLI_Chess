@@ -4,8 +4,11 @@
 #include "../common/exceptions/BadMove.hpp"
 #include "../common/tcp/TCPClient.hpp"
 #include "../common/tcp/TCPServer.hpp"
+#include "Coordinates.hpp"
 #include "Game.hpp"
+#include "TerminalStuffs.hpp"
 #include <algorithm>
+#include <regex>
 
 Player::Player(const string name, PlayerColor playerColor, Game& game)
     : name(name), color(playerColor), game(game) {
@@ -28,26 +31,9 @@ Player::Player(const string name, PlayerColor playerColor, Game& game)
 
 [[nodiscard]] const Coordinates
 Player::coordinatesPrompt(const string& promptMsg) const noexcept {
-    string line;
-
-    while (1) {
-        PrettyPrint::simplePrintln(promptMsg);
-        // std::cin.ignore(100,'\n');
-        std::cin >> line;
-        string strX, strY;
-        try {
-            if (line.size() != 2) {
-                throw BadCoord();
-            }
-
-            strX = line[0];
-            strY = line[1];
-            return Board::createCoord(strX, strY);
-        } catch (BadCoord) {
-            PrettyPrint::simplePrint("got: (" + strX + ", " + strY + ")");
-            PrettyPrint::simplePrintln("Bad input\ntry again");
-        }
-    }
+    string coordinates = TerminalStuffs::readFromInput<std::string>(
+        promptMsg, std::regex("[a-h][0-7]"));
+    return Coordinates{coordinates};
 }
 
 /**
@@ -55,7 +41,7 @@ Player::coordinatesPrompt(const string& promptMsg) const noexcept {
  * @throws throws a BadMove exception in case the piecePtr was null
  */
 void Player::doMove(shared_ptr<Piece>& piecePtr, const Coordinates& to) {
-    if(piecePtr == nullptr){
+    if (piecePtr == nullptr) {
         throw BadMove();
     }
     auto result = std::find(pieces.cbegin(), pieces.cend(), piecePtr);
@@ -81,20 +67,20 @@ void Player::doMove(shared_ptr<Piece>& piecePtr, const Coordinates& to) {
     }
 }
 
-void Player::play(){
+void Player::play() {
     const Coordinates startCoord = getStartCoordinates();
     const Coordinates endCoord = getEndCoordinates();
-    play(startCoord , endCoord);
+    play(startCoord, endCoord);
 }
 
-void Player::play(const Coordinates& from , const Coordinates& to){
+void Player::play(const Coordinates& from, const Coordinates& to) {
     auto piecePtr = game.getBoard().getPieceAt(from);
-    if(piecePtr == nullptr){
+    if (piecePtr == nullptr) {
         throw BadCoord();
     }
-    if(game.validateMove(piecePtr, to)){
+    if (game.validateMove(piecePtr, to)) {
         doMove(piecePtr, to);
-    }else{
+    } else {
         throw BadMove();
     }
 }
