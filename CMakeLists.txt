@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(RastaFinal VERSION 0.1 LANGUAGES CXX)
+project(RastaFinal VERSION 0.1 LANGUAGES CXX DESCRIPTION "CLI-Chess over LAN")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -23,6 +23,6 @@ add_executable(offline_chess ${offline_cpp_files} ${offline_hpp_files})
 add_executable(client_chess ${online_client_cpp_files} ${online_client_hpp_files})
 add_executable(server_chess ${online_server_cpp_files} ${online_server_hpp_files})
 
-target_link_libraries(offline_chess PUBLIC CommonFiles)
-target_link_libraries(client_chess PUBLIC CommonFiles)
-target_link_libraries(server_chess PUBLIC CommonFiles)
+target_link_libraries(offline_chess PRIVATE CommonFiles)
+target_link_libraries(client_chess PRIVATE CommonFiles)
+target_link_libraries(server_chess PRIVATE CommonFiles)
